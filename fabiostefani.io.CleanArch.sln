@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2C5151AA-2954-452F-AE2F-24174D181B93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.Domain", "src\fabiostefani.io.CleanArch.Domain\fabiostefani.io.CleanArch.Domain.csproj", "{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{751B370B-CDF6-49AF-929A-8602DD220EE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.DomainTests", "tests\fabiostefani.io.CleanArch.DomainTests\fabiostefani.io.CleanArch.DomainTests.csproj", "{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC} = {2C5151AA-2954-452F-AE2F-24174D181B93}
+		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22} = {751B370B-CDF6-49AF-929A-8602DD220EE5}
+	EndGlobalSection
+EndGlobal
