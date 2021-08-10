@@ -19,9 +19,9 @@ namespace fabiostefani.io.CleanArch.DomainTests
         {
             var cpf = "778.278.412-36";
             var order = new Order(cpf);
-            order.AddItem("Guitarra", 1000, 2);
-            order.AddItem("Amplificador", 5000, 1);
-            order.AddItem("Cabo", 30, 3);        
+            order.AddItem("1", 1000, 2);
+            order.AddItem("2", 5000, 1);
+            order.AddItem("3", 30, 3);        
             Assert.Equal(7090, order.GetTotal());
         }
 
@@ -30,11 +30,23 @@ namespace fabiostefani.io.CleanArch.DomainTests
         {
             var cpf = "778.278.412-36";
             var order = new Order(cpf);
-            order.AddItem("Guitarra", 1000, 2);
-            order.AddItem("Amplificador", 5000, 1);
-            order.AddItem("Cabo", 30, 3);
-            order.AddCoupon(new Coupon("VALE-20",20));
+            order.AddItem("1", 1000, 2);
+            order.AddItem("2", 5000, 1);
+            order.AddItem("3", 30, 3);
+            order.AddCoupon(new Coupon("VALE-20",20, DateTime.Now));
             Assert.Equal(5672, order.GetTotal());
+        }
+
+        [Fact]
+        public void DeveCriarPedidoComCupomDescontoExpirado()
+        {
+            var cpf = "778.278.412-36";
+            var order = new Order(cpf);
+            order.AddItem("1", 1000, 2);
+            order.AddItem("2", 5000, 1);
+            order.AddItem("3", 30, 3);
+            order.AddCoupon(new Coupon("VALE-20",20, new DateTime(2020,01,01) ));
+            Assert.Equal(7090, order.GetTotal());
         }
     } 
 }
