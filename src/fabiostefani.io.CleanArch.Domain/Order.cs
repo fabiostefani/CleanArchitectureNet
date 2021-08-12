@@ -38,5 +38,6 @@ namespace fabiostefani.io.CleanArch.Domain
         {
             Coupon = coupon;
         }
+        
     }
 }
