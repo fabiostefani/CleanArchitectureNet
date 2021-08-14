@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Application\fabiostefani.io.CleanArch.Application.csproj" />
+    <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Repository\fabiostefani.io.CleanArch.Repository.csproj" />
   </ItemGroup>
 
 </Project>

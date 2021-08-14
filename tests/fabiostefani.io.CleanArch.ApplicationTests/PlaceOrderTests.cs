@@ -1,5 +1,7 @@
 using fabiostefani.io.CleanArch.Application;
 using fabiostefani.io.CleanArch.Application.Dtos;
+using fabiostefani.io.CleanArch.Domain;
+using fabiostefani.io.CleanArch.Repository;
 using Xunit;
 
 namespace fabiostefani.io.CleanArch.ApplicationTests
@@ -13,7 +15,11 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            PlaceOrder placeOrder = new PlaceOrder();
+            var couponRepository = new CouponRepositoryMemory();
+            var itemRepository = new ItemRepositoryMemory();
+            var orderRepository = new OrderRepositoryMemory();
+            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
+            var placeOrder = new PlaceOrder(couponRepository, itemRepository, orderRepository, zipCodeCalculatorApi);
             PlaceOrderOutput output = placeOrder.Execute(input);
             Assert.Equal(5982, output.Total);
         }
@@ -25,7 +31,11 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            PlaceOrder placeOrder = new PlaceOrder();
+            var couponRepository = new CouponRepositoryMemory();
+            var itemRepository = new ItemRepositoryMemory();
+            var orderRepository = new OrderRepositoryMemory();
+            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
+            var placeOrder = new PlaceOrder(couponRepository, itemRepository, orderRepository, zipCodeCalculatorApi);
             PlaceOrderOutput output = placeOrder.Execute(input);
             Assert.Equal(7400, output.Total);
         }
@@ -37,7 +47,11 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            PlaceOrder placeOrder = new PlaceOrder();
+            var couponRepository = new CouponRepositoryMemory();
+            var itemRepository = new ItemRepositoryMemory();
+            var orderRepository = new OrderRepositoryMemory();
+            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
+            var placeOrder = new PlaceOrder(couponRepository, itemRepository, orderRepository, zipCodeCalculatorApi);
             PlaceOrderOutput output = placeOrder.Execute(input);
             Assert.Equal(310, output.Freight);
         }
