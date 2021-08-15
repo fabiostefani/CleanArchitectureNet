@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
@@ -9,13 +7,12 @@ namespace fabiostefani.io.CleanArch.Application
 {
     public class PlaceOrder
     {        
-        private ZipCodeCalculatorApiMemory ZipCodeCalculatorApi;
         private readonly ICouponRepository _couponRepository;
         private readonly IItemRepository _itemRepository;
         private readonly IOrderRepository _orderRepository;
-        private readonly ZipCodeCalculatorApi _zipCodeCalculatorApi;
+        private readonly IZipCodeCalculatorApi _zipCodeCalculatorApi;
 
-        public PlaceOrder(ICouponRepository couponRepository, IItemRepository itemRepository, IOrderRepository orderRepository, ZipCodeCalculatorApi zipCodeCalculatorApi)
+        public PlaceOrder(ICouponRepository couponRepository, IItemRepository itemRepository, IOrderRepository orderRepository, IZipCodeCalculatorApi zipCodeCalculatorApi)
         {
             _couponRepository = couponRepository;
             _itemRepository = itemRepository;

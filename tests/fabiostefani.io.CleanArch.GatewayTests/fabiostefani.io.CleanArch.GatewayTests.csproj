@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Application\fabiostefani.io.CleanArch.Application.csproj" />
-    <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Repository\fabiostefani.io.CleanArch.Repository.csproj" />
+    <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Domain\fabiostefani.io.CleanArch.Domain.csproj" />
     <ProjectReference Include="..\..\src\fabiostefani.io.CleanArch.Gateway\fabiostefani.io.CleanArch.Gateway.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 using fabiostefani.io.CleanArch.Application;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.Domain;
+using fabiostefani.io.CleanArch.Gateway.memory;
 using fabiostefani.io.CleanArch.Repository;
 using Xunit;
 

@@ -1,9 +1,10 @@
-using fabiostefani.io.CleanArch.Domain;
+using System;
+using fabiostefani.io.CleanArch.Gateway.memory;
 using Xunit;
 
-namespace fabiostefani.io.CleanArch.DomainTests
-{
-    public class ZipCodeCalculatorTests
+namespace fabiostefani.io.CleanArch.GatewayTests
+{    
+        public class ZipCodeCalculatorTests
     {
         [Fact]
         public void DeveCalcularADistanciaEntreDoisCeps()
@@ -13,4 +14,5 @@ namespace fabiostefani.io.CleanArch.DomainTests
             Assert.Equal(1000, distance);
         }
     }
+    
 }
