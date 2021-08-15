@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.ApplicationTests", "tests\fabiostefani.io.CleanArch.ApplicationTests\fabiostefani.io.CleanArch.ApplicationTests.csproj", "{697ABED7-EEAB-46D9-B209-0FC6D1760006}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.Repository", "src\fabiostefani.io.CleanArch.Repository\fabiostefani.io.CleanArch.Repository.csproj", "{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,11 +42,16 @@ Global
 		{697ABED7-EEAB-46D9-B209-0FC6D1760006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{697ABED7-EEAB-46D9-B209-0FC6D1760006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{697ABED7-EEAB-46D9-B209-0FC6D1760006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 		{8A2CC297-1FCB-4DE6-81CB-B63B451F4C22} = {751B370B-CDF6-49AF-929A-8602DD220EE5}
 		{F31AEAD3-6D16-4A31-8A23-A222CA75BCAC} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 		{697ABED7-EEAB-46D9-B209-0FC6D1760006} = {751B370B-CDF6-49AF-929A-8602DD220EE5}
+		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 	EndGlobalSection
 EndGlobal
