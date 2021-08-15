@@ -41,6 +41,5 @@ namespace fabiostefani.io.CleanArch.Domain
             if (coupon.IsExpired()) return;            
             Coupon = coupon;
         }
-        
     }
 }
