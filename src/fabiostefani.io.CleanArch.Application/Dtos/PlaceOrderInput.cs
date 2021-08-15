@@ -6,23 +6,24 @@ namespace fabiostefani.io.CleanArch.Application.Dtos
     {
         public string Cpf { get; set; }
         public string Coupon { get; set; }
-        public List<PlaceOrderItemInput> Items { get; set; }
+        public string ZipCode { get; set; }
+        public List<PlaceOrderItemInput> OrderItems { get; set; }
         public PlaceOrderInput()
         {
-            Items = new List<PlaceOrderItemInput>();
+            OrderItems = new List<PlaceOrderItemInput>();
             Cpf = string.Empty;
             Coupon = string.Empty;
+            ZipCode = string.Empty;
         }
     }
 
     public class PlaceOrderItemInput
     {
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public string ItemId { get; set; }
         public int Quantity { get; set; }
         public PlaceOrderItemInput()
         {
-            Description = string.Empty;
+            ItemId = string.Empty;
         }
     }
 }

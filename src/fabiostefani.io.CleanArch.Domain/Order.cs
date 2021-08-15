@@ -8,6 +8,7 @@ namespace fabiostefani.io.CleanArch.Domain
     {
         public Cpf Cpf { get; private set; }
         public decimal Total { get; private set; }
+        public decimal Freight { get; set; }
         public Coupon? Coupon { get; private set; }
         private readonly List<OrderItem> _items;
         public IReadOnlyCollection<OrderItem> OrderItems => _items;
@@ -18,9 +19,9 @@ namespace fabiostefani.io.CleanArch.Domain
             _items = new List<OrderItem>();            
         }
 
-        public void AddItem(string description, decimal price, int quantity)
+        public void AddItem(string itemId, decimal price, int quantity)
         {
-            _items.Add(new OrderItem(description, price, quantity));
+            _items.Add(new OrderItem(itemId, price, quantity));
             Total = GetTotal();
         }
 
@@ -31,11 +32,13 @@ namespace fabiostefani.io.CleanArch.Domain
             {
                 total -= (total * Coupon.Percentage) / 100;
             }
+            total += Freight;
             return total;
         } 
 
         public void AddCoupon(Coupon coupon)
         {
+            if (coupon.IsExpired()) return;            
             Coupon = coupon;
         }
         
