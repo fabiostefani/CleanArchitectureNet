@@ -34,7 +34,7 @@ namespace fabiostefani.io.CleanArch.Application
 
         private void ProcessOrderItems(PlaceOrderInput input, Order order)
         {
-            var distance = _zipCodeCalculatorApi.Calculate(input.ZipCode, "99.999-999"); ;
+            var distance = _zipCodeCalculatorApi.Calculate(input.ZipCode, "99.999-999");
             input.OrderItems.ForEach(orderItem =>
             {
                 var item = _itemRepository.GetById(orderItem.ItemId);

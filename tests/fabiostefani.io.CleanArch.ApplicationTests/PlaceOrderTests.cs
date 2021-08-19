@@ -3,6 +3,8 @@ using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Gateway.memory;
 using fabiostefani.io.CleanArch.Repository;
+using fabiostefani.io.CleanArch.Repository.database.ef;
+using fabiostefani.io.CleanArch.Repository.Repository.Database;
 using Xunit;
 
 namespace fabiostefani.io.CleanArch.ApplicationTests
@@ -17,7 +19,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
             var couponRepository = new CouponRepositoryMemory();
-            var itemRepository = new ItemRepositoryMemory();
+            var itemRepository = new ItemRepositoryDatabase(new EfDataBase());
             var orderRepository = new OrderRepositoryMemory();
             var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
             var placeOrder = new PlaceOrder(couponRepository, itemRepository, orderRepository, zipCodeCalculatorApi);
