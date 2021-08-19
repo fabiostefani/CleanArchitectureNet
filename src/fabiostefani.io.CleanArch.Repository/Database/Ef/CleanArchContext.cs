@@ -7,19 +7,11 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
 {
     public class CleanArchContext : DbContext
     {
-        // public CleanArchContext(DbContextOptions<CleanArchContext> options)
-        //     : base(options) 
-        // { 
-
-        // }
-
-         public DbSet<ItemEf>? Items { get; set; }
-        // public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<ItemEf>? Items { get; set; }        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host = localhost; Port = 5433; Pooling = true; Database = postgres; User Id = postgres; Password = 123456; SearchPath=ccca");
-                                      //postgres://postgres:123456@localhost:5433/postgres
+            optionsBuilder.UseNpgsql("Host = localhost; Port = 5433; Pooling = true; Database = postgres; User Id = postgres; Password = 123456; SearchPath=ccca");                                      
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
