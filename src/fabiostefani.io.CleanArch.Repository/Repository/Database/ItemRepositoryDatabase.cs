@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
@@ -18,9 +18,9 @@ namespace fabiostefani.io.CleanArch.Repository.Repository.Database
             Database = database;
         }
 
-        public Item? GetById(string id)
-        {
-            ItemEf itemEf = Database.One<ItemEf>(x => x.Id == Convert.ToInt32(id));
+        public async Task<Item?> GetById(string id)
+        {            
+            ItemEf itemEf = await Database.One<ItemEf>(x => x.Id == Convert.ToInt32(id));
 
             return new Item(itemEf.Id.ToString(), itemEf.Description, itemEf.Price, itemEf.Width, itemEf.Height, itemEf.Length, itemEf.Weight);
         }

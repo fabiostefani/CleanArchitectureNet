@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
@@ -19,10 +20,10 @@ namespace fabiostefani.io.CleanArch.Application
             _orderRepository = orderRepository;
             _zipCodeCalculatorApi = zipCodeCalculatorApi;            
         }
-        public PlaceOrderOutput Execute(PlaceOrderInput input)
+        public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)
         {
             var order = new Order(input.Cpf);
-            ProcessOrderItems(input, order);
+            await ProcessOrderItems(input, order);
             ProcessCoupon(input, order);
             _orderRepository.Save(order);
             return new PlaceOrderOutput()
@@ -32,16 +33,16 @@ namespace fabiostefani.io.CleanArch.Application
             };
         }
 
-        private void ProcessOrderItems(PlaceOrderInput input, Order order)
+        private async Task ProcessOrderItems(PlaceOrderInput input, Order order)
         {
             var distance = _zipCodeCalculatorApi.Calculate(input.ZipCode, "99.999-999");
-            input.OrderItems.ForEach(orderItem =>
+            foreach (var orderItem in input.OrderItems)
             {
-                var item = _itemRepository.GetById(orderItem.ItemId);
+                var item = await _itemRepository.GetById(orderItem.ItemId);
                 if (item == null) throw new Exception("Item not Found");
                 order.AddItem(orderItem.ItemId, item.Price, orderItem.Quantity);
                 order.Freight += FreightCalculator.Calculate(distance, item) * orderItem.Quantity;
-            });
+            }            
         }
 
         private void ProcessCoupon(PlaceOrderInput input, Order order)

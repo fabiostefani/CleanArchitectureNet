@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
 
@@ -16,9 +17,9 @@ namespace fabiostefani.io.CleanArch.Repository
                 new Item("3", "Cabo", 30, 10, 10, 10, 1)
             };
         }
-        public Item? GetById(string id)
+        public Task<Item?> GetById(string id)
         {
-            return Items.Find(item => item.Id == id);
+            return Task.FromResult(Items.Find(item => item.Id == id));
         }
     }
 }

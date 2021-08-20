@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Repository.database;
 
 namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
@@ -17,7 +18,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
             throw new NotImplementedException();
         }
 
-        public T One<T>(Func<T, bool> where, params Expression<Func<T,object>>[] includes) where T : class
+        public Task<T> One<T>(Expression<Func<T, bool>> where, params Expression<Func<T,object>>[] includes) where T : class
         {
             throw new NotImplementedException();
         }

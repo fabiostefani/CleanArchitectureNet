@@ -1,10 +1,9 @@
-using System.Threading;
-using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace fabiostefani.io.CleanArch.Repository.database.ef
 {
@@ -32,9 +31,10 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             return list;
         }
 
-        public T One<T>(Func<T, bool> where, params Expression<Func<T,object>>[] includes) where T : class
+        public async Task<T> One<T>(Expression<Func<T, bool>> where, params Expression<Func<T,object>>[] includes) where T : class                          
         {
             T? item = null;
+            var cts = new CancellationTokenSource();
             using (var context = new CleanArchContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
@@ -43,7 +43,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
                 foreach (Expression<Func<T, object>> navigationProperty in includes)
                     dbQuery = dbQuery.Include<T, object>(navigationProperty);
  
-                item = dbQuery.AsNoTracking().FirstOrDefault(where); //Apply where clause
+                item = await dbQuery.AsNoTracking().FirstOrDefaultAsync(where, cts.Token); //Apply where clause
             }
             return item;
         }
