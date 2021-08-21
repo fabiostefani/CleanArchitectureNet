@@ -1,6 +1,7 @@
 using System.Linq;
 using fabiostefani.io.CleanArch.Repository.database.ef.ModelEf;
 using fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings;
+using fabiostefani.io.CleanArch.Repository.Database.Ef.ModelEf;
 using Microsoft.EntityFrameworkCore;
 
 namespace fabiostefani.io.CleanArch.Repository.database.ef
@@ -8,10 +9,12 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
     public class CleanArchContext : DbContext
     {
         public DbSet<ItemEf>? Items { get; set; }        
+        public DbSet<CoupomEf>? Coupons { get; set; }
+        public DbSet<OrderEf>? Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host = localhost; Port = 5433; Pooling = true; Database = postgres; User Id = postgres; Password = 123456; SearchPath=ccca");                                      
+            optionsBuilder.UseNpgsql("Host = localhost; Port = 5432; Pooling = true; Database = postgres; User Id = postgres; Password = Postgres2021!; SearchPath=ccca");                                      
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

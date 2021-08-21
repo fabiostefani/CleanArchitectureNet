@@ -15,11 +15,11 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact]
         public async void DeveFazerUmPedido()
         {
-            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE-20", ZipCode = "11.111-111" };
+            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE20", ZipCode = "11.111-111" };
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var couponRepository = new CouponRepositoryMemory();
+            var couponRepository = new CouponRepositoryDatabase(new EfDataBase());
             var itemRepository = new ItemRepositoryDatabase(new EfDataBase());
             var orderRepository = new OrderRepositoryMemory();
             var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
@@ -31,7 +31,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact]
         public async void DeveFazerUmPedidoComCupomExpirado()
         {
-            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE-20-EXPIRED", ZipCode = "11.111-111" };
+            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE20-EXPIRED", ZipCode = "11.111-111" };
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
@@ -47,7 +47,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact]
         public async void DeveFazerUmPedidoComCalculoDeFrete()
         {
-            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE-20-EXPIRED", ZipCode = "11.111-111" };
+            var input = new PlaceOrderInput() { Cpf = "778.278.412-36", Coupon = "VALE20-EXPIRED", ZipCode = "11.111-111" };
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });

@@ -10,7 +10,7 @@ namespace fabiostefani.io.CleanArch.DomainTests
         public void NaoDeveCriarUmPedidoComCpfInvalido()
         {            
             var cpf = "111.111.111-11";         
-            Exception ex = Assert.Throws<Exception>(() => new Order(cpf));            
+            Exception ex = Assert.Throws<Exception>(() => new Order(cpf, DateTime.Now, 1));            
             Assert.Equal("Invalid CPF", ex.Message);            
         }
 
@@ -18,7 +18,7 @@ namespace fabiostefani.io.CleanArch.DomainTests
         public void DeveCriarUmPedidoCom3Itens()
         {
             var cpf = "778.278.412-36";
-            var order = new Order(cpf);
+            var order = new Order(cpf, DateTime.Now, 1);
             order.AddItem("1", 1000, 2);
             order.AddItem("2", 5000, 1);
             order.AddItem("3", 30, 3);        
@@ -29,7 +29,7 @@ namespace fabiostefani.io.CleanArch.DomainTests
         public void DeveCriarPedidoComCupomDesconto()
         {
             var cpf = "778.278.412-36";
-            var order = new Order(cpf);
+            var order = new Order(cpf, DateTime.Now, 1);
             order.AddItem("1", 1000, 2);
             order.AddItem("2", 5000, 1);
             order.AddItem("3", 30, 3);
@@ -41,12 +41,24 @@ namespace fabiostefani.io.CleanArch.DomainTests
         public void DeveCriarPedidoComCupomDescontoExpirado()
         {
             var cpf = "778.278.412-36";
-            var order = new Order(cpf);
+            var order = new Order(cpf, DateTime.Now, 1);
             order.AddItem("1", 1000, 2);
             order.AddItem("2", 5000, 1);
             order.AddItem("3", 30, 3);
             order.AddCoupon(new Coupon("VALE-20",20, new DateTime(2020,01,01) ));
             Assert.Equal(7090, order.GetTotal());
+        }
+
+        [Fact]
+        public void DeveCriarPedidoComCodigoConformeRegra()
+        {
+            var cpf = "778.278.412-36";
+            var order = new Order(cpf, DateTime.Now, 1);
+            order.AddItem("1", 1000, 2);
+            order.AddItem("2", 5000, 1);
+            order.AddItem("3", 30, 3);
+            order.AddCoupon(new Coupon("VALE-20",20, new DateTime(2020,01,01) ));
+            Assert.Equal("202100000001", order.Code.Value);
         }
     } 
 }

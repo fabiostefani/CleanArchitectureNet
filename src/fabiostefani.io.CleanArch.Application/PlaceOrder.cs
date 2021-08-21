@@ -22,9 +22,10 @@ namespace fabiostefani.io.CleanArch.Application
         }
         public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)
         {
-            var order = new Order(input.Cpf);
+            int sequence = _orderRepository.Count();
+            var order = new Order(input.Cpf, DateTime.Now, sequence);
             await ProcessOrderItems(input, order);
-            ProcessCoupon(input, order);
+            await ProcessCoupon(input, order);
             _orderRepository.Save(order);
             return new PlaceOrderOutput()
             {
@@ -45,10 +46,10 @@ namespace fabiostefani.io.CleanArch.Application
             }            
         }
 
-        private void ProcessCoupon(PlaceOrderInput input, Order order)
+        private async Task ProcessCoupon(PlaceOrderInput input, Order order)
         {
             if (string.IsNullOrEmpty(input.Coupon)) return;
-            var coupon = _couponRepository.GetByCode(input.Coupon);
+            var coupon = await _couponRepository.GetByCode(input.Coupon);
             if (coupon == null) return;
             order.AddCoupon(coupon);
         }

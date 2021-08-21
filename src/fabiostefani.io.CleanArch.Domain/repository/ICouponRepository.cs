@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace fabiostefani.io.CleanArch.Domain.Interfaces
 {
     public interface ICouponRepository
     {
-        Coupon? GetByCode(string code);
+        Task<Coupon?> GetByCode(string code);
     }
 }

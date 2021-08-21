@@ -47,12 +47,3 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
         }
     }
 }
-
-
-// id serial,
-//     description text,
-//     price numeric,
-//     height integer,
-//     width integer,
-//     length integer,
-//     weight integer
