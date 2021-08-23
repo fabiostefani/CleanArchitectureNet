@@ -1,6 +1,5 @@
 using System.Linq;
-using fabiostefani.io.CleanArch.Repository.database.ef.ModelEf;
-using fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings;
+using fabiostefani.io.CleanArch.Repository.database.Ef.ModelEf;
 using fabiostefani.io.CleanArch.Repository.Database.Ef.ModelEf;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +10,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
         public DbSet<ItemEf>? Items { get; set; }        
         public DbSet<CoupomEf>? Coupons { get; set; }
         public DbSet<OrderEf>? Orders { get; set; }
+        public DbSet<OrderItemEf> OrderItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

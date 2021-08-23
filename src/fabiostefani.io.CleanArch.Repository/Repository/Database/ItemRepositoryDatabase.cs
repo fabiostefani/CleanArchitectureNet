@@ -1,12 +1,9 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
 using fabiostefani.io.CleanArch.Repository.database;
-using fabiostefani.io.CleanArch.Repository.database.ef;
-using fabiostefani.io.CleanArch.Repository.database.ef.ModelEf;
-using Microsoft.EntityFrameworkCore;
+using fabiostefani.io.CleanArch.Repository.database.Ef.ModelEf;
 
 namespace fabiostefani.io.CleanArch.Repository.Repository.Database
 {

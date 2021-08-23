@@ -1,4 +1,4 @@
-namespace fabiostefani.io.CleanArch.Repository.database.ef.ModelEf
+namespace fabiostefani.io.CleanArch.Repository.database.Ef.ModelEf
 {
     public class ItemEf
     {

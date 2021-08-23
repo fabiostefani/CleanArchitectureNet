@@ -17,8 +17,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
             .IsRequired();
 
             builder.Property(x => x.CouponCode)
-            .HasColumnName("coupon_code")
-            .IsRequired()
+            .HasColumnName("coupon_code")            
             .HasMaxLength(100);
 
             builder.Property(x => x.Code)
@@ -44,25 +43,10 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
             .HasColumnName("serial")
             .IsRequired();
 
+            builder.HasMany(x => x.OrderItems)
+            .WithOne()
+            .HasForeignKey(x => x.OrdemId);
+
         }
     }
 }
-
-// create table ccca. (
-// 	 serial,
-// 	 text,
-// 	 text,
-// 	 text,
-// 	 timestamp,
-// 	 numeric,
-// 	 integer,
-// 	primary key (id)
-// );
-
-// create table ccca.order_item (
-// 	id_order integer,
-// 	id_item integer,
-// 	price numeric,
-// 	quantity integer,
-// 	primary key (id_order, id_item)
-// );

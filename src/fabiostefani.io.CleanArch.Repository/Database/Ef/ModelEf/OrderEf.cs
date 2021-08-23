@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace fabiostefani.io.CleanArch.Repository.Database.Ef.ModelEf
 {
@@ -9,11 +10,11 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.ModelEf
         public string Cpf { get; set; }
         public decimal Total { get; set; }
         public decimal Freight { get; set; }
-        public string CouponCode { get; set; }
+        public string? CouponCode { get; set; }
         public DateTime IssueDate { get; set; }
         public int Sequence { get; set; }
 
-        // private readonly List<OrderItem> _items;
+        public readonly List<OrderItemEf> OrderItems;
         // public IReadOnlyCollection<OrderItem> OrderItems => _items;
 
     }

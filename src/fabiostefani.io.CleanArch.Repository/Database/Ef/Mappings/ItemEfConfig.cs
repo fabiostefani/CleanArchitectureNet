@@ -1,4 +1,4 @@
-using fabiostefani.io.CleanArch.Repository.database.ef.ModelEf;
+using fabiostefani.io.CleanArch.Repository.database.Ef.ModelEf;
 using Microsoft.EntityFrameworkCore;
 
 namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings

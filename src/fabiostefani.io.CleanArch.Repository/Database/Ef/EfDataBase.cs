@@ -31,6 +31,22 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             return list;
         }
 
+        public IQueryable<TEntity> Many<TEntity>(params Expression<Func<TEntity,object>>[] includes) where TEntity : class
+        {
+            IQueryable<TEntity> list;
+            using (var context = new CleanArchContext())
+            {
+                IQueryable<TEntity> dbQuery = context.Set<TEntity>();
+ 
+                //Apply eager loading
+                foreach (Expression<Func<TEntity, object>> navigationProperty in includes)
+                    dbQuery = dbQuery.Include<TEntity, object>(navigationProperty);
+
+                list = dbQuery.AsNoTracking().AsQueryable<TEntity>();
+            }
+            return list;
+        }
+
         public async Task<T> One<T>(Expression<Func<T, bool>> where, params Expression<Func<T,object>>[] includes) where T : class                          
         {
             T? item = null;

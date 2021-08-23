@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace fabiostefani.io.CleanArch.Application.Dtos
@@ -7,6 +8,7 @@ namespace fabiostefani.io.CleanArch.Application.Dtos
         public string Cpf { get; set; }
         public string Coupon { get; set; }
         public string ZipCode { get; set; }
+        public DateTime IssueDate { get; set; }
         public List<PlaceOrderItemInput> OrderItems { get; set; }
         public PlaceOrderInput()
         {

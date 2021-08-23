@@ -4,5 +4,6 @@ namespace fabiostefani.io.CleanArch.Application.Dtos
     {
         public decimal Total { get; set; }
         public decimal Freight { get; set; }
+        public string Code { get; set; }
     }
 }

@@ -18,6 +18,11 @@ namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
             throw new NotImplementedException();
         }
 
+        public IQueryable<TEntity> Many<TEntity>(params Expression<Func<TEntity, object>>[] includes) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<T> One<T>(Expression<Func<T, bool>> where, params Expression<Func<T,object>>[] includes) where T : class
         {
             throw new NotImplementedException();
