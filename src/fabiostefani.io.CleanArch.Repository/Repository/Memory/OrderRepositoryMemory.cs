@@ -8,10 +8,20 @@ namespace fabiostefani.io.CleanArch.Repository
 {
     public class OrderRepositoryMemory : IOrderRepository
     {
+        static OrderRepositoryMemory instance;
         private readonly List<Order> Orders;
-        public OrderRepositoryMemory()
+        private OrderRepositoryMemory()
         {
             Orders = new List<Order>();
+        }
+
+        public static OrderRepositoryMemory GetInstance()
+        {
+            if (OrderRepositoryMemory.instance == null)
+            {
+                OrderRepositoryMemory.instance = new OrderRepositoryMemory();
+            }
+            return OrderRepositoryMemory.instance;
         }
 
 

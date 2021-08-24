@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.Domain;
+using fabiostefani.io.CleanArch.Domain.Factory;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
 
 namespace fabiostefani.io.CleanArch.Application
@@ -13,11 +14,11 @@ namespace fabiostefani.io.CleanArch.Application
         private readonly IOrderRepository _orderRepository;
         private readonly IZipCodeCalculatorApi _zipCodeCalculatorApi;
 
-        public PlaceOrder(ICouponRepository couponRepository, IItemRepository itemRepository, IOrderRepository orderRepository, IZipCodeCalculatorApi zipCodeCalculatorApi)
+        public PlaceOrder(IRepositoryFactory repositoryFactory, IZipCodeCalculatorApi zipCodeCalculatorApi)
         {
-            _couponRepository = couponRepository;
-            _itemRepository = itemRepository;
-            _orderRepository = orderRepository;
+            _couponRepository = repositoryFactory.CreateCouponRepository();
+            _itemRepository = repositoryFactory.CreateItemRepository();
+            _orderRepository = repositoryFactory.CreateOrderRepository();
             _zipCodeCalculatorApi = zipCodeCalculatorApi;            
         }
         public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)

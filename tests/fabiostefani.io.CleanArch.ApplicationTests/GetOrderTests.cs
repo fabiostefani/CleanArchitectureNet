@@ -3,13 +3,11 @@ using fabiostefani.io.CleanArch.Application;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.ApplicationTests.Config;
 using fabiostefani.io.CleanArch.Gateway.memory;
-using fabiostefani.io.CleanArch.Repository;
-using fabiostefani.io.CleanArch.Repository.database.ef;
-using fabiostefani.io.CleanArch.Repository.Repository.Database;
+using fabiostefani.io.CleanArch.Repository.Factory;
 using Xunit;
 
 namespace fabiostefani.io.CleanArch.ApplicationTests
-{    
+{
     [Collection(nameof(ClienteCollection))]
     public class GetOrderTests
     {
@@ -28,14 +26,13 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
             input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var couponRepository = new CouponRepositoryDatabase(new EfDataBase());
-            var itemRepository = new ItemRepositoryDatabase(new EfDataBase());
-            var orderRepository = new OrderRepositoryDatabase(new EfDataBase());            
+            var repositoryFactory = new DatabaseRepositoryFactory();            
+            var orderRepository = repositoryFactory.CreateOrderRepository();
             await orderRepository.Clean();
             var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
-            var placeOrder = new PlaceOrder(couponRepository, itemRepository, orderRepository, zipCodeCalculatorApi);
+            var placeOrder = new PlaceOrder(repositoryFactory, zipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
-            var getOrder = new GetOrder(itemRepository, orderRepository);
+            var getOrder = new GetOrder(repositoryFactory);
             var orderOutput = await getOrder.Execute(output.Code);
             Assert.Equal(5982, orderOutput.Total);
         }
