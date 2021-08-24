@@ -4,7 +4,9 @@ namespace fabiostefani.io.CleanArch.Domain.Interfaces
 {
     public interface IOrderRepository
     {
-        void Save(Order order);
-        int Count();
+        Task<bool> Save(Order order);
+        Task<int> Count();
+        Task Clean();
+        Task<Order?> GetByCode(string code);
     }
 }

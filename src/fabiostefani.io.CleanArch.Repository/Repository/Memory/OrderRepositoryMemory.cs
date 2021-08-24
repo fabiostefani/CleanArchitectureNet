@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
@@ -14,13 +15,25 @@ namespace fabiostefani.io.CleanArch.Repository
         }
 
 
-        public void Save(Order order)
+        public Task<bool> Save(Order order)
         {
             Orders.Add(order);
+            return Task.FromResult(true);
         }
-        public int Count()
+        public Task<int> Count()
         {
-            return Orders.Count;
+            return Task.FromResult(Orders.Count);
+        }
+
+        public Task Clean()
+        {
+            Orders.Clear();
+            return Task.FromResult(true);
+        }
+
+        public Task<Order?> GetByCode(string code)
+        {
+            return Task.FromResult(Orders.FirstOrDefault(x => x.Code.Value == code));
         }
     }
 }

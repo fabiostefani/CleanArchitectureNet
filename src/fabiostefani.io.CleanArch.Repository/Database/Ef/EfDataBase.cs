@@ -1,19 +1,17 @@
+using System.Collections;
 using System.Linq;
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace fabiostefani.io.CleanArch.Repository.database.ef
 {
     public class EfDataBase : IDatabase
-    {
-        
-        public EfDataBase()
-        {
-            
-        }
+    {        
+        public EfDataBase() { }
 
         public IQueryable<TEntity> Many<TEntity>(Func<TEntity, bool> where, params Expression<Func<TEntity,object>>[] includes) where TEntity : class
         {
@@ -21,28 +19,22 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             using (var context = new CleanArchContext())
             {
                 IQueryable<TEntity> dbQuery = context.Set<TEntity>();
- 
-                //Apply eager loading
                 foreach (Expression<Func<TEntity, object>> navigationProperty in includes)
                     dbQuery = dbQuery.Include<TEntity, object>(navigationProperty);
-
                 list = dbQuery.AsNoTracking().Where(where).AsQueryable<TEntity>();
             }
             return list;
         }
 
-        public IQueryable<TEntity> Many<TEntity>(params Expression<Func<TEntity,object>>[] includes) where TEntity : class
+        public async Task<IList<TEntity>> All<TEntity>(params Expression<Func<TEntity,object>>[] includes) where TEntity : class
         {
-            IQueryable<TEntity> list;
+            IList<TEntity> list;
             using (var context = new CleanArchContext())
             {
-                IQueryable<TEntity> dbQuery = context.Set<TEntity>();
- 
-                //Apply eager loading
+                IQueryable<TEntity> dbQuery = context.Set<TEntity>();                                            
                 foreach (Expression<Func<TEntity, object>> navigationProperty in includes)
                     dbQuery = dbQuery.Include<TEntity, object>(navigationProperty);
-
-                list = dbQuery.AsNoTracking().AsQueryable<TEntity>();
+                list = await dbQuery.AsNoTracking().ToListAsync();            
             }
             return list;
         }
@@ -54,24 +46,20 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             using (var context = new CleanArchContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
-                 
-                //Apply eager loading
                 foreach (Expression<Func<T, object>> navigationProperty in includes)
-                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
- 
+                    dbQuery = dbQuery.Include<T, object>(navigationProperty); 
                 item = await dbQuery.AsNoTracking().FirstOrDefaultAsync(where, cts.Token); //Apply where clause
             }
             return item;
         }
 
-        public async void Add<T>(T item) where T : class
+        public async Task Add<T>(T item) where T : class
         {
             using (var context = new CleanArchContext())
             {
                 context.Entry(item).State = EntityState.Added;                
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync();                
             }
-
         }
         public async void Update<T>(T item) where T : class
         {
@@ -81,7 +69,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
                 await context.SaveChangesAsync();
             }
         }
-        public async void Remove<T>(T item) where T : class
+        public async Task Remove<T>(T item) where T : class
         {
             using (var context = new CleanArchContext())
             {
@@ -90,7 +78,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             } 
         }
 
-        public async void RemoveRange<T>(params T[] items) where T : class
+        public async Task RemoveRange<T>(IList<T> items) where T : class
         {
             using (var context = new CleanArchContext())
             {       

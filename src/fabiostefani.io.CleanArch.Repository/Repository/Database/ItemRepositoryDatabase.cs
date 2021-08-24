@@ -9,15 +9,15 @@ namespace fabiostefani.io.CleanArch.Repository.Repository.Database
 {
     public class ItemRepositoryDatabase : IItemRepository
     {
-        public IDatabase Database { get; }
+        private readonly IDatabase Database;
         public ItemRepositoryDatabase(IDatabase database)
         {
-            Database = database;
+            this.Database = database;
         }
 
         public async Task<Item?> GetById(string id)
         {            
-            ItemEf itemEf = await Database.One<ItemEf>(x => x.Id == Convert.ToInt32(id));
+            ItemEf itemEf = await this.Database.One<ItemEf>(x => x.Id == Convert.ToInt32(id));
 
             return new Item(itemEf.Id.ToString(), itemEf.Description, itemEf.Price, itemEf.Width, itemEf.Height, itemEf.Length, itemEf.Weight);
         }

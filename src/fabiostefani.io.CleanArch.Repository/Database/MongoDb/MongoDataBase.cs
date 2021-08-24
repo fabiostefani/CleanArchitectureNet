@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
 {
     public class MongoDataBase : IDatabase
     {
-        public void Add<T>(T item) where T : class
+        public Task Add<T>(T item) where T : class
         {
             throw new NotImplementedException();
         }
@@ -18,7 +19,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
             throw new NotImplementedException();
         }
 
-        public IQueryable<TEntity> Many<TEntity>(params Expression<Func<TEntity, object>>[] includes) where TEntity : class
+        public Task<IList<TEntity>> All<TEntity>(params Expression<Func<TEntity, object>>[] includes) where TEntity : class
         {
             throw new NotImplementedException();
         }
@@ -28,12 +29,12 @@ namespace fabiostefani.io.CleanArch.Repository.Database.MongoDb
             throw new NotImplementedException();
         }
 
-        public void Remove<T>(T item) where T : class
+        public Task Remove<T>(T item) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveRange<T>(params T[] items) where T : class
+        public Task RemoveRange<T>(IList<T> items) where T : class
         {
             throw new NotImplementedException();
         }

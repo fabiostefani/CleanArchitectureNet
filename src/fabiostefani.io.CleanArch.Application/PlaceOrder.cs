@@ -22,11 +22,11 @@ namespace fabiostefani.io.CleanArch.Application
         }
         public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)
         {
-            int sequence = _orderRepository.Count() + 1;
+            int sequence = await _orderRepository.Count() + 1;
             var order = new Order(input.Cpf, input.IssueDate, sequence);
             await ProcessOrderItems(input, order);
             await ProcessCoupon(input, order);
-            _orderRepository.Save(order);
+            await _orderRepository.Save(order);
             return new PlaceOrderOutput()
             {
                 Total = order.GetTotal(),

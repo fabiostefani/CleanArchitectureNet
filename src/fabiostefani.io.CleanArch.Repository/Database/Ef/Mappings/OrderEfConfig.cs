@@ -14,7 +14,8 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
 
             builder.Property(x => x.Id)
             .HasColumnName("id")
-            .IsRequired();
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
             builder.Property(x => x.CouponCode)
             .HasColumnName("coupon_code")            
@@ -45,7 +46,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
 
             builder.HasMany(x => x.OrderItems)
             .WithOne()
-            .HasForeignKey(x => x.OrdemId);
+            .HasForeignKey(x => x.OrderId);
 
         }
     }

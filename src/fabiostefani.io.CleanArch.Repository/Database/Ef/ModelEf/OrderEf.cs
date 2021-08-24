@@ -7,8 +7,7 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.ModelEf
     {
         public int Id { get; set; }
         public string Code { get; set; }
-        public string Cpf { get; set; }
-        public decimal Total { get; set; }
+        public string Cpf { get; set; }        
         public decimal Freight { get; set; }
         public string? CouponCode { get; set; }
         public DateTime IssueDate { get; set; }
