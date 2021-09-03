@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.GatewayTests", "tests\fabiostefani.io.CleanArch.GatewayTests\fabiostefani.io.CleanArch.GatewayTests.csproj", "{D520F61D-A9DB-4AEF-8D6D-F2EDED155637}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.CleanArch.Api", "src\fabiostefani.io.CleanArch.Api\fabiostefani.io.CleanArch.Api.csproj", "{803D5AD1-DC59-4D10-BF52-F6E98082F807}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{D520F61D-A9DB-4AEF-8D6D-F2EDED155637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D520F61D-A9DB-4AEF-8D6D-F2EDED155637}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D520F61D-A9DB-4AEF-8D6D-F2EDED155637}.Release|Any CPU.Build.0 = Release|Any CPU
+		{803D5AD1-DC59-4D10-BF52-F6E98082F807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{803D5AD1-DC59-4D10-BF52-F6E98082F807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{803D5AD1-DC59-4D10-BF52-F6E98082F807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{803D5AD1-DC59-4D10-BF52-F6E98082F807}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9C0DD0E2-FE92-45F7-A7BE-8F8DE8DC8DBC} = {2C5151AA-2954-452F-AE2F-24174D181B93}
@@ -67,5 +73,6 @@ Global
 		{9C492DB3-BB5B-45EE-B29B-2434AE5DDAAF} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 		{F593AC21-3D0A-4DA2-913F-8CD638183B85} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 		{D520F61D-A9DB-4AEF-8D6D-F2EDED155637} = {751B370B-CDF6-49AF-929A-8602DD220EE5}
+		{803D5AD1-DC59-4D10-BF52-F6E98082F807} = {2C5151AA-2954-452F-AE2F-24174D181B93}
 	EndGlobalSection
 EndGlobal

@@ -59,7 +59,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
             {
                 context.Entry(item).State = EntityState.Added;                
                 await context.SaveChangesAsync();                
-            }
+            }            
         }
         public async void Update<T>(T item) where T : class
         {

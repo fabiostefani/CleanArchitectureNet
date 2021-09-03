@@ -8,28 +8,22 @@ using Xunit;
 
 namespace fabiostefani.io.CleanArch.ApplicationTests
 {
-    [Collection(nameof(ClienteCollection))]
+    [Collection(nameof(PlaceOrderCollection))]
     public class PlaceOrderTests
     {
-        private readonly ClienteTestsFixture _clienteTestsFixture;
+        private readonly PlaceOrderTestsFixture _placeOrderTestsFixture;
 
-        public PlaceOrderTests(ClienteTestsFixture clienteTestsFixture)
+        public PlaceOrderTests(PlaceOrderTestsFixture PlaceOrderTestsFixture)
         {
-            _clienteTestsFixture = clienteTestsFixture;
+            _placeOrderTestsFixture = PlaceOrderTestsFixture;
+            _placeOrderTestsFixture.PrepareTests();
         }
 
         [Fact()]
         public async void DeveFazerUmPedido()
         {
-            var input = new PlaceOrderInput() { IssueDate = DateTime.Now, Cpf = "778.278.412-36", Coupon = "VALE20", ZipCode = "11.111-111" };
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var repositoryFactory = new DatabaseRepositoryFactory();                        
-            var orderRepository = repositoryFactory.CreateOrderRepository();
-            await orderRepository.Clean();
-            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
-            var placeOrder = new PlaceOrder(repositoryFactory, zipCodeCalculatorApi);
+            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(5982, output.Total);
         }
@@ -37,15 +31,8 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCupomExpirado()
         {
-            var input = new PlaceOrderInput() { IssueDate = DateTime.Now, Cpf = "778.278.412-36", Coupon = "VALE20_EXPIRED", ZipCode = "11.111-111" };
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var repositoryFactory = new DatabaseRepositoryFactory();                        
-            var orderRepository = repositoryFactory.CreateOrderRepository();
-            await orderRepository.Clean();
-            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
-            var placeOrder = new PlaceOrder(repositoryFactory, zipCodeCalculatorApi);
+            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(7400, output.Total);
         }
@@ -53,15 +40,8 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCalculoDeFrete()
         {
-            var input = new PlaceOrderInput() { IssueDate = DateTime.Now, Cpf = "778.278.412-36", Coupon = "VALE20_EXPIRED", ZipCode = "11.111-111" };
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var repositoryFactory = new DatabaseRepositoryFactory();                        
-            var orderRepository = repositoryFactory.CreateOrderRepository();
-            await orderRepository.Clean();
-            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
-            var placeOrder = new PlaceOrder(repositoryFactory, zipCodeCalculatorApi);
+            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(310, output.Freight);
         }
@@ -69,17 +49,10 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCodigoCalculado()
         {
-            var issueDate = DateTime.Now;
-            var input = new PlaceOrderInput() {IssueDate = issueDate,  Cpf = "778.278.412-36", Coupon = "VALE20_EXPIRED", ZipCode = "11.111-111" };
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "1", Quantity = 2 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "2", Quantity = 1 });
-            input.OrderItems.Add(new PlaceOrderItemInput() { ItemId = "3", Quantity = 3 });
-            var repositoryFactory = new DatabaseRepositoryFactory();                        
-            var orderRepository = repositoryFactory.CreateOrderRepository();
-            await orderRepository.Clean();
-            var zipCodeCalculatorApi = new ZipCodeCalculatorApiMemory();
-            var placeOrder = new PlaceOrder(repositoryFactory, zipCodeCalculatorApi);
+            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             await placeOrder.Execute(input);
+            var orderRepository = _placeOrderTestsFixture.RepositoryFactory.CreateOrderRepository();            
             int sequence = await orderRepository.Count() + 1;
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal("202100000002", output.Code);

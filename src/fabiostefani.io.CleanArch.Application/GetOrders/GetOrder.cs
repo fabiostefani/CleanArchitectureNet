@@ -34,10 +34,12 @@ namespace fabiostefani.io.CleanArch.Application
 
             async Task<List<GetOrderItemsOutput>> ProcessOrderItemsOutput(Order? order)
             {
+                if(order == null) throw new Exception("Order not specified");
                 var orderItensOutput = new List<GetOrderItemsOutput>();
                 foreach (var orderItem in order.OrderItems)
                 {
-                    Item item = await _itemRepository.GetById(orderItem?.ItemId);
+                    if (orderItem == null) throw new Exception("OrderItem not specified");
+                    Item item = await _itemRepository.GetById(orderItem.ItemId);
                     if (item == null) throw new Exception($"Item not found by ID {orderItem.ItemId}.");
                     GetOrderItemsOutput orderItemOutput = new GetOrderItemsOutput()
                     {
