@@ -31,6 +31,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             var getOrder = new GetOrder(_placeOrderTestsFixture.RepositoryFactory);
             var orderOutput = await getOrder.Execute(output.Code);
             Assert.Equal(5982, orderOutput.Total);
+            Assert.Equal(1054.5m, orderOutput.Taxes);
         }
     }
 }

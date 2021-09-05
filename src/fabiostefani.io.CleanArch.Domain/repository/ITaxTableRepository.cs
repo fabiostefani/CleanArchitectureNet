@@ -5,6 +5,6 @@ namespace fabiostefani.io.CleanArch.Domain.repository
 {
     public interface ITaxTableRepository
     {
-         Task<TaxTable?> GetByIdItem(int idItem);
+         Task<List<TaxTable>> GetByIdItem(int idItem);
     }
 }

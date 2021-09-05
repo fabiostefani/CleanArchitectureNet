@@ -1,5 +1,6 @@
 using fabiostefani.io.CleanArch.Domain.Factory;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
+using fabiostefani.io.CleanArch.Domain.repository;
 using fabiostefani.io.CleanArch.Repository.database.ef;
 using fabiostefani.io.CleanArch.Repository.Repository.Database;
 
@@ -20,6 +21,11 @@ namespace fabiostefani.io.CleanArch.Repository.Factory
         public IOrderRepository CreateOrderRepository()
         {
             return new OrderRepositoryDatabase(new EfDataBase());
+        }
+
+        public ITaxTableRepository CreateTaxTableRepository()
+        {
+            return new TaxTableRepositoryDatabase(new EfDataBase());
         }
     }
 }

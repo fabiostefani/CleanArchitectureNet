@@ -11,6 +11,7 @@ namespace fabiostefani.io.CleanArch.Domain
         public Cpf Cpf { get; private set; }
         public decimal Total { get; private set; }
         public decimal Freight { get; set; }
+        public decimal Taxes { get; set; }
         public Coupon? Coupon { get; private set; }
         public DateTime IssueDate { get; private set; }
         public int Sequence { get; private set; }

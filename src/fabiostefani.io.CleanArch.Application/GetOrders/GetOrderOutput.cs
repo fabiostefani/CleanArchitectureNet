@@ -7,6 +7,7 @@ namespace fabiostefani.io.CleanArch.Application.Dtos
         public decimal Total { get; set; }
         public decimal Freight { get; set; }
         public string Code { get; set; }
+        public decimal Taxes { get; set; }
         public IList<GetOrderItemsOutput> OrderItems { get; set; }
     }
 

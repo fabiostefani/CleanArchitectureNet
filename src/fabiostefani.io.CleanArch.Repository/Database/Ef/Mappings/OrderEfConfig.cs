@@ -44,6 +44,11 @@ namespace fabiostefani.io.CleanArch.Repository.Database.Ef.Mappings
             .HasColumnName("serial")
             .IsRequired();
 
+            builder.Property(x=>x.Taxes)
+            .HasColumnName("taxes")
+            .IsRequired()
+            .HasPrecision(9,2);
+
             builder.HasMany(x => x.OrderItems)
             .WithOne()
             .HasForeignKey(x => x.OrderId);

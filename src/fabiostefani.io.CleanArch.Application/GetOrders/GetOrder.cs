@@ -29,7 +29,8 @@ namespace fabiostefani.io.CleanArch.Application
                 Total = order.GetTotal(),
                 Freight = order.Freight,
                 Code = order.Code.Value,
-                OrderItems = orderItensOutput
+                OrderItems = orderItensOutput,
+                Taxes = order.Taxes
             };
 
             async Task<List<GetOrderItemsOutput>> ProcessOrderItemsOutput(Order? order)

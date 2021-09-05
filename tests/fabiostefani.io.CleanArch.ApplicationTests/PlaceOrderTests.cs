@@ -57,5 +57,15 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal("202100000002", output.Code);
         }
+
+        [Fact()]
+        public async void DeveFazerUmPedidoCalculandoImposto()
+        {
+            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
+            PlaceOrderOutput output = await placeOrder.Execute(input);
+            Assert.Equal(5982, output.Total);
+            Assert.Equal(1054.5m, output.Taxes);
+        }
     }
 }

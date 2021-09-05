@@ -34,7 +34,8 @@ namespace fabiostefani.io.CleanArch.Repository.Repository.Database
                 Cpf = order.Cpf.Inscricao,
                 Freight = order.Freight,
                 IssueDate = order.IssueDate,
-                Sequence = order.Sequence
+                Sequence = order.Sequence,
+                Taxes = order.Taxes
             };            
             await this.Database.Add<OrderEf>(orderEf);            
             foreach (var orderItem in order.OrderItems)
@@ -74,6 +75,7 @@ namespace fabiostefani.io.CleanArch.Repository.Repository.Database
                 order.AddCoupon(coupon);
             }
             order.Freight = orderData.Freight;
+            order.Taxes = orderData.Taxes;
 
             return order;
         }

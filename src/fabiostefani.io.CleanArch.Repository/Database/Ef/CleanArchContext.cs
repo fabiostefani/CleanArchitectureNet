@@ -10,7 +10,8 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
         public DbSet<ItemEf>? Items { get; set; }        
         public DbSet<CoupomEf>? Coupons { get; set; }
         public DbSet<OrderEf>? Orders { get; set; }
-        public DbSet<OrderItemEf> OrderItems { get; set; }
+        public DbSet<OrderItemEf>? OrderItems { get; set; }
+        public DbSet<TaxTableEf>? TaxTables { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
