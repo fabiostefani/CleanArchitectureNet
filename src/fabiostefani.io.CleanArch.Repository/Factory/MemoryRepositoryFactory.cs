@@ -1,5 +1,7 @@
 using fabiostefani.io.CleanArch.Domain.Factory;
 using fabiostefani.io.CleanArch.Domain.Interfaces;
+using fabiostefani.io.CleanArch.Domain.repository;
+using fabiostefani.io.CleanArch.Repository.Repository.Memory;
 
 namespace fabiostefani.io.CleanArch.Repository.Factory
 {
@@ -18,6 +20,11 @@ namespace fabiostefani.io.CleanArch.Repository.Factory
         public IOrderRepository CreateOrderRepository()
         {
             return OrderRepositoryMemory.GetInstance();
+        }
+
+        public ITaxTableRepository CreateTaxTableRepository()
+        {
+            return new TaxTableRepositoryMemory();
         }
     }
 }

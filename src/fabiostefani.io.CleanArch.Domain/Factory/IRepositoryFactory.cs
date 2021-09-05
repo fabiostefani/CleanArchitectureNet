@@ -1,4 +1,5 @@
 using fabiostefani.io.CleanArch.Domain.Interfaces;
+using fabiostefani.io.CleanArch.Domain.repository;
 
 namespace fabiostefani.io.CleanArch.Domain.Factory
 {
@@ -7,5 +8,6 @@ namespace fabiostefani.io.CleanArch.Domain.Factory
         IItemRepository CreateItemRepository();
         ICouponRepository CreateCouponRepository();
         IOrderRepository CreateOrderRepository();
+        ITaxTableRepository CreateTaxTableRepository();
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using fabiostefani.io.CleanArch.Domain.entities;
 
 namespace fabiostefani.io.CleanArch.Domain.service

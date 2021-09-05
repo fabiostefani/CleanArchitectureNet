@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.entities;
 using fabiostefani.io.CleanArch.Domain.Factory;

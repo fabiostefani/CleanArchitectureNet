@@ -1,3 +1,5 @@
+using System;
+
 namespace fabiostefani.io.CleanArch.Api;
 
 public class WeatherForecast

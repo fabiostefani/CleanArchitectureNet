@@ -1,3 +1,4 @@
+using System;
 using fabiostefani.io.CleanArch.Domain.service;
 
 namespace fabiostefani.io.CleanArch.Domain.Factory
