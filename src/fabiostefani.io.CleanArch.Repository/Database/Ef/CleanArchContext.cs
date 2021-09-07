@@ -12,6 +12,7 @@ namespace fabiostefani.io.CleanArch.Repository.database.ef
         public DbSet<OrderEf>? Orders { get; set; }
         public DbSet<OrderItemEf>? OrderItems { get; set; }
         public DbSet<TaxTableEf>? TaxTables { get; set; }
+        public DbSet<StockEntryEf>? StockEntries { get; set; }        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -2,6 +2,7 @@ using System;
 using fabiostefani.io.CleanArch.Application;
 using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.ApplicationTests.Config;
+using fabiostefani.io.CleanArch.Domain.service.PlaceOrders;
 using fabiostefani.io.CleanArch.Gateway.memory;
 using fabiostefani.io.CleanArch.Repository.Factory;
 using Xunit;
@@ -22,7 +23,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedido()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(5982, output.Total);
@@ -31,7 +32,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCupomExpirado()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(7400, output.Total);
@@ -40,7 +41,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCalculoDeFrete()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(310, output.Freight);
@@ -49,7 +50,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoComCodigoCalculado()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponExpired();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             await placeOrder.Execute(input);
             var orderRepository = _placeOrderTestsFixture.RepositoryFactory.CreateOrderRepository();            
@@ -61,11 +62,21 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         [Fact()]
         public async void DeveFazerUmPedidoCalculandoImposto()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             Assert.Equal(5982, output.Total);
             Assert.Equal(1054.5m, output.Taxes);
+        }
+
+        [Fact()]
+        public async Task NaoDeveFazerPedidoDeUmItemSemEstoqueDisponivel()
+        {
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputQuantityOutOfStock();            
+            var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);            
+            Func<Task> action = async () => await placeOrder.Execute(input);
+            var ex = await Assert.ThrowsAsync<Exception>(action);
+            Assert.Contains("Out of stock", ex.Message);
         }
     }
 }

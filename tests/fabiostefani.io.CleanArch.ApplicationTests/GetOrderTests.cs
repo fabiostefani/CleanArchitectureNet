@@ -4,6 +4,7 @@ using fabiostefani.io.CleanArch.Application.Dtos;
 using fabiostefani.io.CleanArch.ApplicationTests.Config;
 using fabiostefani.io.CleanArch.Domain;
 using fabiostefani.io.CleanArch.Domain.Factory;
+using fabiostefani.io.CleanArch.Domain.service.PlaceOrders;
 using fabiostefani.io.CleanArch.Gateway.memory;
 using fabiostefani.io.CleanArch.Repository.Factory;
 using Xunit;
@@ -25,7 +26,7 @@ namespace fabiostefani.io.CleanArch.ApplicationTests
         
         public async void DeveRetornarOsDadosDoPedido()
         {
-            PlaceOrderInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
+            OrderCreatorInput input = _placeOrderTestsFixture.CreatePlaceOrderInputCouponValid();
             var placeOrder = new PlaceOrder(_placeOrderTestsFixture.RepositoryFactory, _placeOrderTestsFixture.ZipCodeCalculatorApi);
             PlaceOrderOutput output = await placeOrder.Execute(input);
             var getOrder = new GetOrder(_placeOrderTestsFixture.RepositoryFactory);

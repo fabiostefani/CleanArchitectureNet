@@ -1,29 +1,26 @@
-using System;
-using System.Collections.Generic;
-
-namespace fabiostefani.io.CleanArch.Application.Dtos
+namespace fabiostefani.io.CleanArch.Domain.service.PlaceOrders
 {
-    public class PlaceOrderInput
+    public class OrderCreatorInput
     {
         public string Cpf { get; set; }
         public string Coupon { get; set; }
         public string ZipCode { get; set; }
         public DateTime IssueDate { get; set; }
-        public List<PlaceOrderItemInput> OrderItems { get; set; }
-        public PlaceOrderInput()
+        public List<OrderCreatorItemInput> OrderItems { get; set; }
+        public OrderCreatorInput()
         {
-            OrderItems = new List<PlaceOrderItemInput>();
+            OrderItems = new List<OrderCreatorItemInput>();
             Cpf = string.Empty;
             Coupon = string.Empty;
             ZipCode = string.Empty;
         }
     }
 
-    public class PlaceOrderItemInput
+    public class OrderCreatorItemInput
     {
         public string ItemId { get; set; }
         public int Quantity { get; set; }
-        public PlaceOrderItemInput()
+        public OrderCreatorItemInput()
         {
             ItemId = string.Empty;
         }

@@ -22,6 +22,11 @@ namespace fabiostefani.io.CleanArch.Repository.Factory
             return OrderRepositoryMemory.GetInstance();
         }
 
+        public IStockEntryRepository CreateStockEntryRepository()
+        {
+            return new StockEntryRepositoryMemory();
+        }
+
         public ITaxTableRepository CreateTaxTableRepository()
         {
             return new TaxTableRepositoryMemory();

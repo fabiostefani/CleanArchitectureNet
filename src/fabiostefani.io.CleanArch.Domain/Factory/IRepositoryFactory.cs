@@ -9,5 +9,6 @@ namespace fabiostefani.io.CleanArch.Domain.Factory
         ICouponRepository CreateCouponRepository();
         IOrderRepository CreateOrderRepository();
         ITaxTableRepository CreateTaxTableRepository();
+        IStockEntryRepository CreateStockEntryRepository();
     }
 }

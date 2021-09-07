@@ -23,6 +23,11 @@ namespace fabiostefani.io.CleanArch.Repository.Factory
             return new OrderRepositoryDatabase(new EfDataBase());
         }
 
+        public IStockEntryRepository CreateStockEntryRepository()
+        {
+            return new StockEntryRepositoryDatabase(new EfDataBase());
+        }
+
         public ITaxTableRepository CreateTaxTableRepository()
         {
             return new TaxTableRepositoryDatabase(new EfDataBase());
